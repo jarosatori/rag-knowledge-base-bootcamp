@@ -12,30 +12,16 @@
 
 ### 📦 Predpoklady — toto si nainštaluj **pred** štartom
 
-Sú to 3 bezplatné veci. Bez nich to nepôjde, ale s nimi to zvládne každý.
+Stačí **jedna jediná vec**: **Claude Code**.
 
-#### 1. Python 3.10 alebo novší
+Všetko ostatné (git, Python, Homebrew, gh, Docker...) **nainštaluje za teba samotný Claude** počas setup-u, cez balíčkové manažéry tvojho systému (`brew` na Macu, `winget` na Windows). Ty len odpovedáš na jeho otázky a on robí robotu.
 
-Programovací jazyk, na ktorom RAG beží. Nemusíš mu rozumieť — len ho nainštaluj a zabudni na neho.
+#### Nainštaluj si Claude Code
 
-- **Mac:** Otvor [python.org/downloads/macos](https://www.python.org/downloads/macos/) → klikni na najnovší **macOS 64-bit installer** → stiahni a klikni 2× na `.pkg` súbor → Next, Next, Install.
-- **Windows:** Otvor [python.org/downloads/windows](https://www.python.org/downloads/windows/) → stiahni najnovší **Windows installer (64-bit)** → klikni 2× na `.exe`. **DÔLEŽITÉ:** Na prvej obrazovke installera **zaškrtni „Add Python to PATH"**, inak to nebude fungovať. Potom Install.
+- **Najjednoduchšie — desktop app (odporúčané pre nepokročilých):** Stiahni z [claude.com/code](https://claude.com/code) a nainštaluj. Hotovo.
+- Alternatíva pre pokročilých — CLI: `npm install -g @anthropic-ai/claude-code` (vyžaduje Node.js).
 
-Overenie že máš (voliteľné, len pre istotu): otvor terminál (viď nižšie ako) a napíš `python3 --version`. Ak vidíš číslo `3.10` alebo viac, je to OK.
-
-#### 2. Git
-
-Nástroj na sťahovanie kódu z GitHubu. Automaticky funguje v pozadí.
-
-- **Mac:** Otvor `Terminal.app` (viď nižšie ako) a napíš `git --version`. Ak ti vyskočí dialóg „Install Command Line Developer Tools", klikni **Install** a počkaj 5 minút. Hotovo.
-- **Windows:** Stiahni installer z [git-scm.com/download/win](https://git-scm.com/download/win) → klikni 2× na `.exe` → klikni **Next** všade (defaulty sú OK) → Install.
-
-#### 3. Claude Code (desktop app alebo CLI)
-
-Toto je AI asistent, ktorý za teba spraví celý setup.
-
-- **Najjednoduchšie — desktop app:** Stiahni z [claude.com/code](https://claude.com/code) a nainštaluj.
-- Alternatíva pre pokročilých — CLI: `npm install -g @anthropic-ai/claude-code`.
+To je všetko. Choď rovno na **Cestu A** nižšie.
 
 ---
 
@@ -71,33 +57,75 @@ Terminál (alebo „príkazový riadok") je čierne okno, kam píšeš textové 
 #### A.3 — Vlep tento prompt do chat-input okna Claude Code a stlač Enter
 
 ```
-Práve som otvoril prázdnu zložku, do ktorej chcem nainštalovať RAG knowledge base
-z https://github.com/jarosatori/rag-knowledge-base-bootcamp
+Práve som otvoril prázdnu zložku v Claude Code, do ktorej chcem nainštalovať
+RAG knowledge base z https://github.com/jarosatori/rag-knowledge-base-bootcamp
 
 Som člen Claude Bootcampu, podnikateľ, nie programátor. Nikdy som neotvoril
-terminál a chcem všetko spraviť cez teba.
+terminál a chcem všetko spraviť cez teba. NEPOSIELAJ ma sťahovať veci z
+internetu, ak sa to dá nainštalovať príkazom — to spravíš ty za mňa.
 
-Postup:
+DÔLEŽITÉ ROZLIŠENIE GitHub:
+- Na STIAHNUTIE tohto repa GitHub účet NEPOTREBUJEM (repo je verejné, git
+  clone funguje anonymne).
+- Neskôr v procese (Fáza 6) si budem chcieť vytvoriť VLASTNÝ súkromný GitHub
+  repo ako zálohu mojej kópie. Vtedy si vytvorím GitHub účet (5 minút,
+  zadarmo) a ty ma cez to prevedieš automaticky cez "gh" CLI s autentifikáciou
+  cez prehliadač. Žiadne SSH kľúče, žiadne tokeny ručne.
 
-1. Najprv skontroluj, či mám nainštalovaný git a python (3.10+). Ak niečo
-   chýba, povedz mi presne ako to nainštalovať na môj systém a počkaj kým to
-   dokončím.
+POSTUP:
 
-2. Keď bude všetko pripravené, stiahni repo do TEJTO zložky príkazom:
+1. Zisti, na akom operačnom systéme bežím (macOS / Windows / Linux).
+
+2. Skontroluj, či mám tieto základné nástroje:
+   - git
+   - python3 (verzia 3.10 alebo vyššia)
+
+3. Pre čokoľvek čo chýba alebo je staré:
+
+   AK SOM NA macOS:
+   - git: spusti `xcode-select --install`. Vyskočí mi systémový popup,
+     kliknem "Install" a počkám 5-10 minút. Toto nainštaluje aj git aj
+     kompilery, ktoré budeme neskôr potrebovať na inštaláciu Python balíčkov.
+   - python3 (ak chýba alebo je < 3.10):
+     a) Najprv skontroluj, či mám Homebrew (`brew --version`).
+     b) Ak Homebrew mám: spusti `brew install python@3.12`.
+     c) Ak Homebrew nemám: daj mi PRESNE jeden riadok, ktorý mám vlepiť do
+        aplikácie Terminal.app. Vysvetli mi, ako Terminal otvoriť (Cmd+Space →
+        napíš "Terminal" → Enter). Upozorni ma vopred, že si bude pýtať heslo
+        k Macu (rovnaké ako keď sa prihlasujem na svoj počítač). Počkaj kým
+        ti poviem, že je hotovo, potom over `brew --version` a pokračuj
+        inštaláciou Pythonu cez brew.
+
+   AK SOM NA Windows:
+   - git: `winget install --id Git.Git -e --source winget` (winget je
+     vstavaný vo Win10 a Win11, nemusíš ho inštalovať).
+   - python: `winget install --id Python.Python.3.12 -e --source winget`.
+   - Po každej inštalácii môže byť potrebné zavrieť a otvoriť Claude Code,
+     aby sa nový PATH načítal — povedz mi keď treba.
+   - Ak winget nefunguje (starý Windows), navrhni mi alternatívu (napr.
+     Chocolatey).
+
+   AK SOM NA Linux:
+   - Použi balíčkový manažér mojej distribúcie (apt / dnf / pacman).
+
+4. Keď máme git aj python3 (≥ 3.10), stiahni repo do TEJTO prázdnej zložky:
    git clone https://github.com/jarosatori/rag-knowledge-base-bootcamp.git .
-   (POZOR: bodka na konci je dôležitá — znamená "do aktuálnej zložky")
+   (POZOR: bodka na konci znamená "do aktuálnej zložky" — bez nej by vznikla
+   podzložka, čo nechcem.)
 
-3. Po stiahnutí prečítaj SETUP_GUIDE.md a postupuj presne podľa neho. Začni
-   Fázou 0 a pýtaj sa ma postupne.
+5. Po stiahnutí si prečítaj SETUP_GUIDE.md (ten z disku, nie z pamäte) a
+   postupuj presne podľa neho. Začni Fázou 0 a pokračuj fázami 1 až 8. Pýtaj
+   sa ma postupne, jeden krok naraz.
 
-4. Rieš všetko za mňa — spúšťaj príkazy, edituj súbory, rieš chyby. Pýtaj sa
-   len keď to fakt potrebuješ alebo keď ide o platené/nevratné veci. Vysvetľuj
-   v ľudskej reči, nie v žargóne. Hovor po slovensky a tykaj mi.
+6. Rieš všetko za mňa — spúšťaj príkazy, edituj súbory, rieš chyby. Pýtaj sa
+   len keď to fakt potrebuješ alebo keď ide o platené/nevratné veci (API
+   kľúče, vytvorenie GitHub účtu, platený deploy do cloudu). Vysvetľuj v
+   ľudskej reči, nie v žargóne. Hovor po slovensky a tykaj mi.
 
 Pripravený? Začni.
 ```
 
-**To je všetko.** Od tejto chvíle Claude robí všetko sám — stiahne kód, skontroluje predpoklady, pomôže s API kľúčmi, naliuje obsah, otestuje, deploynuje. Ty len odpovedáš na jeho otázky.
+**To je všetko.** Od tejto chvíle Claude robí všetko sám — nainštaluje git/python cez balíčkový manažér, stiahne kód, prejde s tebou všetkých 8 fáz (discovery → konfigurácia → ingest → test → GitHub backup → deploy → verifikácia). Ty len odpovedáš na jeho otázky a na 1-2 miestach klikneš v browseri (GitHub auth, Railway login).
 
 ---
 
@@ -148,16 +176,45 @@ Pripravený? Začni.
 
 **To je všetko.** Claude od tej chvíle vie:
 
+- ✅ **Detekuje OS** (Mac/Windows/Linux) a **inštaluje git + Python za teba** cez `brew` alebo `winget` (žiadne sťahovanie z webu)
 - ✅ Spýtať sa ťa **na čo** RAG bude (content / support / internal / sales / legal / iné) a podľa toho **automaticky** zvolí správnu architektúru
-- ✅ Skontrolovať Python, git, závislosti a doinštalovať čo chýba
 - ✅ Pomôcť ti získať **OpenAI, Qdrant Cloud a Cohere API kľúče** (presné URL a kroky)
-- ✅ Vytvoriť `.env` súbor a vygenerovať bezpečné API kľúče prístupových úrovní
+- ✅ Vytvoriť `.env` súbor a **automaticky vygenerovať bezpečné access kľúče**
 - ✅ Pomôcť ti **pripraviť tvoj obsah** (.md/.docx/.pdf) — vrátane automatického pridania YAML frontmatter ak chýba
 - ✅ Spustiť **ingestion**, audit a sanity-test retrieval s tvojimi reálnymi otázkami
-- ✅ **Deploynúť** to na Railway alebo Render (alebo nechať lokálne)
-- ✅ Pripojiť hotovú RAG do tvojho **Claude Code cez MCP server**, takže ju vieš použiť hneď
+- ✅ **Vytvoriť ti súkromný GitHub repo ako zálohu** (cez `gh` CLI s browser auth — žiadne tokeny ručne)
+- ✅ **Deploynúť** to do cloudu (Railway / Render) **alebo lokálne cez Docker + ngrok** — podľa tvojej voľby
+- ✅ Pripojiť hotovú RAG do tvojho **Claude Code cez MCP server**
 
-Celý setup trvá **20-40 minút** podľa toho koľko obsahu naliuvaš.
+Celý setup trvá **30-60 minút** podľa toho koľko obsahu naliuvaš.
+
+---
+
+## ❓ FAQ — Otázky, ktoré možno máš teraz
+
+**„Potrebujem GitHub účet?"**
+Na **stiahnutie** tohto repa **nie** — je verejné, `git clone` funguje anonymne. Na **zálohovanie tvojej vlastnej kópie** (Fáza 6, voliteľná ale silne odporúčaná) **áno** — vytvoríš si zadarmo cez email/Google a Claude ťa cez to prevedie automaticky cez `gh` CLI s browser autentifikáciou (žiadne SSH kľúče, žiadne tokeny ručne).
+
+**„Musím platiť za niečo?"**
+- **OpenAI:** Áno, treba ~$5 kreditu (jednorazovo, vystačí na desaťtisíce dokumentov)
+- **Qdrant Cloud:** Free tier stačí na desaťtisíce chunkov
+- **Cohere:** Trial zadarmo (10 req/min, dosť na testovanie)
+- **Deploy:** ~$5/mes Railway, alebo **$0** ak ideš lokálne + ngrok
+- **GitHub:** $0 (súkromné repá zadarmo)
+
+**„Nikdy som neotvoril terminál, zvládnem to?"**
+Áno. Cesta A (vyššie) je navrhnutá tak, **aby si terminál ani nemusel otvárať**. Claude robí všetky príkazy za teba cez Bash tool. Ty len odpovedáš a 1-2× klikneš v browseri (pri OAuth login).
+
+**„Kde to bude bežať?"**
+Na konci si vyberáš jednu z 3 ciest:
+- **Lokálne na tvojom počítači + ngrok** — zadarmo, ale len keď je laptop zapnutý
+- **Railway cloud** — $5/mes, beží 24/7
+- **Render** — alternatíva k Railway
+
+Claude ti pri rozhodovaní pomôže.
+
+**„Čo ak sa mi to nepodarí alebo niečo zlyhá?"**
+Claude rieši errory automaticky. Ak neviete ďalej, otvorte issue na tomto repe alebo napíšte do Bootcamp Skool.
 
 ---
 

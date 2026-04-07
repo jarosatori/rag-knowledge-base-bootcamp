@@ -1,0 +1,37 @@
+# Files that should NOT be uploaded to Railway during `railway up`.
+# Railway only needs the Python service code — knowledge-base content lives
+# in Qdrant Cloud (or local Qdrant), not on the Railway server.
+
+# Local knowledge base content (lives in Qdrant, not on Railway)
+knowledge-base/
+
+# Local virtualenv
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Tests results & backups (dev artifacts)
+tests/results/
+tools/backups/
+
+# Local state
+.ingested_files.json
+.ingested_files.json.*
+audit_log.jsonl
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+
+# Git
+.git/
+.gitignore
+.gitkeep
+
+# Docs (Railway doesn't need these — saves upload bandwidth)
+*.md
+!README.md
