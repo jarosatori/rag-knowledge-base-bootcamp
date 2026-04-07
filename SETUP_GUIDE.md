@@ -33,21 +33,55 @@ version: 1.0
 
 ---
 
-## Fáza 0 — Privítanie a quick check
+## Fáza 0 — Privítanie, environment check, a (možno) clone
 
 Hneď ako prečítaš tento súbor, povedz:
 
 > "Ahoj 👋 Som tvoj inštalátor RAG databázy. Pomôžem ti to celé rozbehnúť za 20-40 minút. Začneme krátkym rozhovorom, nech to nastavíme presne na tvoj use case, a potom to spolu spustíme.
 >
-> Najprv sa pozriem, či máš nainštalované, čo treba. Sekundu."
+> Najprv sa pozriem, kde sme a čo už máme. Sekundu."
 
-Spusti tieto checky **paralelne**:
+### 0.1 — Detekuj situáciu
+
+Spusti **paralelne**:
+- `pwd` (kde sme)
+- `ls -la` (čo je v tejto zložke)
 - `python3 --version` (musí byť ≥ 3.10)
 - `git --version`
 - `docker --version` (voliteľné)
-- `pwd` a `ls` (zisti kde sme)
 
-Zhrň výsledok. Ak Python chýba alebo je < 3.10, povedz mu ako ho nainštalovať (Mac: `brew install python@3.12`, Windows: oficiálny installer z python.org). Ak je všetko OK, choď do Fázy 1.
+**Vyhodnoť dva prípady:**
+
+**Prípad A — Sme v už-naklonovanom repe** (vidíš `src/`, `SETUP_GUIDE.md`, `requirements.txt` v `ls`):
+→ Skvelé. Choď rovno do **0.2** (verifikácia predpokladov), potom Fáza 1.
+
+**Prípad B — Sme v PRÁZDNEJ zložke** (alebo zložka neobsahuje `SETUP_GUIDE.md`/`src/`):
+→ Používateľ otvoril Claude Code v prázdnej zložke (Cesta A z README) a chce, aby si stiahol repo SEM. Postupuj takto:
+
+1. Najprv over že má `git`. Ak nemá, povedz mu **presne ako ho nainštalovať** (Mac: spusti `git --version` v Termináli a klikni Install na popup. Windows: stiahni z https://git-scm.com/download/win, klikni 2× Next, Install). Počkaj kým to dokončí.
+
+2. Keď git je OK, spusti:
+   ```bash
+   git clone https://github.com/jarosatori/rag-knowledge-base-bootcamp.git .
+   ```
+   **Bodka na konci je dôležitá** — naklonuje obsah do aktuálnej zložky namiesto vytvorenia podzložky.
+
+3. Po klonovaní spusti znovu `ls -la` a potvrď, že vidíš `SETUP_GUIDE.md`, `src/`, `requirements.txt`. Ak áno, **prečítaj si SETUP_GUIDE.md ZNOVA** (lebo ten ktorý čítaš teraz mohol byť z mojej pamäte) a pokračuj z bodu 0.2.
+
+### 0.2 — Verifikácia predpokladov
+
+V tomto bode už máš v aktuálnej zložke obsah repa. Skontroluj:
+
+- `python3 --version` ≥ 3.10. Ak nie:
+  - **Mac:** Stiahni z https://www.python.org/downloads/macos/, klikni 2× na pkg, Install. Alebo `brew install python@3.12`.
+  - **Windows:** Stiahni z https://www.python.org/downloads/windows/, **ZAŠKRTNI „Add Python to PATH"** v installeri, Install.
+  - Po inštalácii povedz mu zavrieť terminál (alebo Claude Code) a otvoriť znovu, aby sa nová verzia načítala.
+- `git` ≥ 2.0 (už by mal byť, lebo bez neho by sme sa sem nedostali)
+- `docker --version` voliteľné — ak chce lokálny Qdrant, potrebuje. Inak ignoruj.
+
+**Zhrň výsledok ľudsky** a choď do Fázy 1. Príklad zhrnutia:
+
+> "Super, máš všetko čo treba. Teraz ti položím pár otázok, aby som RAG nastavil presne na to, čo budeš s ňou robiť. Začneme."
 
 ---
 

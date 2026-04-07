@@ -4,18 +4,108 @@
 
 ---
 
-## 🚀 Quickstart (5 minút prípravy + Claude ťa prevezme)
+## 🚀 Quickstart
 
-### Krok 1 — Vyber si zložku, kde to chceš mať
+> **Si úplný začiatočník a nikdy si neotvoril terminál?** Pohoda. Tu je presne čo treba urobiť. Najskôr si nainštaluj 3 veci (5 minút), potom si vyber jednu z dvoch ciest — odporúčam **Cestu A (bez terminálu)**.
 
-Rozhodni sa, kam chceš RAG nainštalovať. Napríklad `~/Documents/MyRAG/` alebo `~/Projects/`. Bude to **trvalé miesto** — odtiaľ to pobeží a tam budeš dopĺňať svoj obsah.
+---
 
-### Krok 2 — Otvor terminál a stiahni repo do tej zložky
+### 📦 Predpoklady — toto si nainštaluj **pred** štartom
 
-**Mac:** otvor `Terminal.app` (Spotlight `Cmd+Space` → napíš "Terminal" → Enter).
-**Windows:** otvor `PowerShell` alebo `Git Bash`.
+Sú to 3 bezplatné veci. Bez nich to nepôjde, ale s nimi to zvládne každý.
 
-Skopíruj tento blok príkazov a **uprav prvé dva riadky** podľa toho, kde chceš RAG mať:
+#### 1. Python 3.10 alebo novší
+
+Programovací jazyk, na ktorom RAG beží. Nemusíš mu rozumieť — len ho nainštaluj a zabudni na neho.
+
+- **Mac:** Otvor [python.org/downloads/macos](https://www.python.org/downloads/macos/) → klikni na najnovší **macOS 64-bit installer** → stiahni a klikni 2× na `.pkg` súbor → Next, Next, Install.
+- **Windows:** Otvor [python.org/downloads/windows](https://www.python.org/downloads/windows/) → stiahni najnovší **Windows installer (64-bit)** → klikni 2× na `.exe`. **DÔLEŽITÉ:** Na prvej obrazovke installera **zaškrtni „Add Python to PATH"**, inak to nebude fungovať. Potom Install.
+
+Overenie že máš (voliteľné, len pre istotu): otvor terminál (viď nižšie ako) a napíš `python3 --version`. Ak vidíš číslo `3.10` alebo viac, je to OK.
+
+#### 2. Git
+
+Nástroj na sťahovanie kódu z GitHubu. Automaticky funguje v pozadí.
+
+- **Mac:** Otvor `Terminal.app` (viď nižšie ako) a napíš `git --version`. Ak ti vyskočí dialóg „Install Command Line Developer Tools", klikni **Install** a počkaj 5 minút. Hotovo.
+- **Windows:** Stiahni installer z [git-scm.com/download/win](https://git-scm.com/download/win) → klikni 2× na `.exe` → klikni **Next** všade (defaulty sú OK) → Install.
+
+#### 3. Claude Code (desktop app alebo CLI)
+
+Toto je AI asistent, ktorý za teba spraví celý setup.
+
+- **Najjednoduchšie — desktop app:** Stiahni z [claude.com/code](https://claude.com/code) a nainštaluj.
+- Alternatíva pre pokročilých — CLI: `npm install -g @anthropic-ai/claude-code`.
+
+---
+
+### 💡 Čo je „terminál" a ako ho otvoriť
+
+Terminál (alebo „príkazový riadok") je čierne okno, kam píšeš textové príkazy namiesto klikania myšou. Vyzerá technicky, ale na to čo budeme robiť stačí kopírovať a vlepiť.
+
+- **Mac:** Stlač `Cmd + Space` (otvorí Spotlight vyhľadávanie) → napíš `Terminal` → Enter. Otvorí sa biele alebo čierne okno s blikajúcim kurzorom.
+- **Windows:** Stlač klávesu Windows → napíš `PowerShell` → Enter. Alebo (lepšie) ak si nainštaloval Git, napíš `Git Bash` → Enter.
+
+**Dobrá správa:** ak si vyberieš **Cestu A** nižšie, terminál ani **nemusíš otvárať**. Claude to spraví za teba.
+
+---
+
+### 🅰️ Cesta A — Bez terminálu (odporúčané)
+
+> Pre nepokročilých. **Nemusíš otvárať terminál ani nič klikať vo Finder/Explorer okrem dvoch klikov.**
+
+#### A.1 — Vytvor si prázdnu zložku, kde chceš RAG mať
+
+- **Mac (Finder):** Otvor Finder → choď do Documents → klikni pravým tlačidlom → **New Folder** → pomenuj ju napríklad `MyRAG`. Hotovo. Cesta bude `~/Documents/MyRAG`.
+- **Windows (Explorer):** Otvor File Explorer → choď do Documents → pravý klik do prázdnej plochy → **New → Folder** → pomenuj ju `MyRAG`.
+
+> Táto zložka bude **trvalé miesto pre tvoju RAG**. Odtiaľ to pobeží, sem budeš dávať obsah. Zapamätaj si jej cestu.
+
+#### A.2 — Otvor Claude Code app a otvor v ňom tú zložku
+
+1. Spusti **Claude Code** aplikáciu
+2. Klikni **File → Open Folder…** (alebo `Cmd+O` na Macu / `Ctrl+O` na Windows)
+3. Naviguj na zložku `MyRAG`, ktorú si práve vytvoril, a klikni **Open**
+4. V ľavom paneli teraz vidíš prázdnu zložku — to je v poriadku, ešte v nej nič nie je
+
+#### A.3 — Vlep tento prompt do chat-input okna Claude Code a stlač Enter
+
+```
+Práve som otvoril prázdnu zložku, do ktorej chcem nainštalovať RAG knowledge base
+z https://github.com/jarosatori/rag-knowledge-base-bootcamp
+
+Som člen Claude Bootcampu, podnikateľ, nie programátor. Nikdy som neotvoril
+terminál a chcem všetko spraviť cez teba.
+
+Postup:
+
+1. Najprv skontroluj, či mám nainštalovaný git a python (3.10+). Ak niečo
+   chýba, povedz mi presne ako to nainštalovať na môj systém a počkaj kým to
+   dokončím.
+
+2. Keď bude všetko pripravené, stiahni repo do TEJTO zložky príkazom:
+   git clone https://github.com/jarosatori/rag-knowledge-base-bootcamp.git .
+   (POZOR: bodka na konci je dôležitá — znamená "do aktuálnej zložky")
+
+3. Po stiahnutí prečítaj SETUP_GUIDE.md a postupuj presne podľa neho. Začni
+   Fázou 0 a pýtaj sa ma postupne.
+
+4. Rieš všetko za mňa — spúšťaj príkazy, edituj súbory, rieš chyby. Pýtaj sa
+   len keď to fakt potrebuješ alebo keď ide o platené/nevratné veci. Vysvetľuj
+   v ľudskej reči, nie v žargóne. Hovor po slovensky a tykaj mi.
+
+Pripravený? Začni.
+```
+
+**To je všetko.** Od tejto chvíle Claude robí všetko sám — stiahne kód, skontroluje predpoklady, pomôže s API kľúčmi, naliuje obsah, otestuje, deploynuje. Ty len odpovedáš na jeho otázky.
+
+---
+
+### 🅱️ Cesta B — S terminálom (pre tých čo ho ovládajú)
+
+> Rýchlejšie ak vieš čo robíš.
+
+#### B.1 — Otvor terminál a stiahni repo
 
 ```bash
 mkdir -p ~/Documents/MyRAG
@@ -23,33 +113,24 @@ cd ~/Documents/MyRAG
 git clone https://github.com/jarosatori/rag-knowledge-base-bootcamp.git
 ```
 
-Tým sa vytvorí podzložka `rag-knowledge-base-bootcamp` vo vnútri `MyRAG/`. Celá cesta bude:
-`~/Documents/MyRAG/rag-knowledge-base-bootcamp/`
+Vytvorí sa cesta `~/Documents/MyRAG/rag-knowledge-base-bootcamp/`.
 
-> **Tip:** Ak chceš úplne vlastné meno zložky (napr. `moja-rag` namiesto `rag-knowledge-base-bootcamp`), pridaj ho na koniec git príkazu:
+> **Tip:** Pre vlastné meno zložky pridaj ho za URL:
 > ```bash
 > git clone https://github.com/jarosatori/rag-knowledge-base-bootcamp.git moja-rag
 > ```
 
-### Krok 3 — Otvor zložku v Claude Code
+#### B.2 — Otvor zložku v Claude Code
 
-Máš dve možnosti — fungujú obe rovnako:
+**Desktop app:** File → Open Folder → vyber `rag-knowledge-base-bootcamp/`.
 
-**A) Claude Code desktop app** (odporúčané pre nepokročilých):
-1. Otvor Claude Code aplikáciu
-2. Klikni **File → Open Folder…** (alebo `Cmd+O` na Macu, `Ctrl+O` na Windows)
-3. Naviguj na `~/Documents/MyRAG/rag-knowledge-base-bootcamp/` (alebo cestu, ktorú si si zvolil) a klikni **Open**
-4. Claude Code teraz pracuje v tejto zložke — vidíš ju v ľavom paneli
-
-**B) Claude Code CLI** (ak ho už máš):
+**CLI:**
 ```bash
 cd ~/Documents/MyRAG/rag-knowledge-base-bootcamp
 claude
 ```
 
-### Krok 4 — Skopíruj a vlep tento prompt do Claude Code
-
-V chat-input okne Claude Code vlep tento text a stlač Enter:
+#### B.3 — Vlep prompt
 
 ```
 Ahoj. Práve som naklonoval tento RAG knowledge base repo a chcem si ho rozbehnúť.
@@ -60,7 +141,7 @@ ku ktorému sa pripojím cez MCP.
 Prečítaj si SETUP_GUIDE.md a postupuj presne podľa neho. Začni Fázou 0 a pýtaj
 sa ma postupne. Rieš všetko za mňa — spúšťaj príkazy, edituj súbory, rieš
 chyby. Pýtaj sa len keď to fakt potrebuješ alebo keď ide o platené/nevratné
-veci. Vysvetľuj v ľudskej reči, nie v žargóne.
+veci. Vysvetľuj v ľudskej reči, nie v žargóne. Hovor po slovensky a tykaj mi.
 
 Pripravený? Začni.
 ```
