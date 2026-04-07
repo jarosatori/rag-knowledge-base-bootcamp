@@ -6,34 +6,63 @@
 
 ## 🚀 Quickstart (5 minút prípravy + Claude ťa prevezme)
 
-### Krok 1 — Skopíruj a spusti tieto 3 príkazy
+### Krok 1 — Vyber si zložku, kde to chceš mať
+
+Rozhodni sa, kam chceš RAG nainštalovať. Napríklad `~/Documents/MyRAG/` alebo `~/Projects/`. Bude to **trvalé miesto** — odtiaľ to pobeží a tam budeš dopĺňať svoj obsah.
+
+### Krok 2 — Otvor terminál a stiahni repo do tej zložky
+
+**Mac:** otvor `Terminal.app` (Spotlight `Cmd+Space` → napíš "Terminal" → Enter).
+**Windows:** otvor `PowerShell` alebo `Git Bash`.
+
+Skopíruj tento blok príkazov a **uprav prvé dva riadky** podľa toho, kde chceš RAG mať:
 
 ```bash
-cd ~/Documents
+mkdir -p ~/Documents/MyRAG
+cd ~/Documents/MyRAG
 git clone https://github.com/jarosatori/rag-knowledge-base-bootcamp.git
-cd rag-knowledge-base-bootcamp
 ```
 
-### Krok 2 — Otvor Claude Code v tomto adresári
+Tým sa vytvorí podzložka `rag-knowledge-base-bootcamp` vo vnútri `MyRAG/`. Celá cesta bude:
+`~/Documents/MyRAG/rag-knowledge-base-bootcamp/`
 
+> **Tip:** Ak chceš úplne vlastné meno zložky (napr. `moja-rag` namiesto `rag-knowledge-base-bootcamp`), pridaj ho na koniec git príkazu:
+> ```bash
+> git clone https://github.com/jarosatori/rag-knowledge-base-bootcamp.git moja-rag
+> ```
+
+### Krok 3 — Otvor zložku v Claude Code
+
+Máš dve možnosti — fungujú obe rovnako:
+
+**A) Claude Code desktop app** (odporúčané pre nepokročilých):
+1. Otvor Claude Code aplikáciu
+2. Klikni **File → Open Folder…** (alebo `Cmd+O` na Macu, `Ctrl+O` na Windows)
+3. Naviguj na `~/Documents/MyRAG/rag-knowledge-base-bootcamp/` (alebo cestu, ktorú si si zvolil) a klikni **Open**
+4. Claude Code teraz pracuje v tejto zložke — vidíš ju v ľavom paneli
+
+**B) Claude Code CLI** (ak ho už máš):
 ```bash
+cd ~/Documents/MyRAG/rag-knowledge-base-bootcamp
 claude
 ```
 
-### Krok 3 — Skopíruj a vlep tento prompt do Claude Code
+### Krok 4 — Skopíruj a vlep tento prompt do Claude Code
+
+V chat-input okne Claude Code vlep tento text a stlač Enter:
 
 ```
 Ahoj. Práve som naklonoval tento RAG knowledge base repo a chcem si ho rozbehnúť.
-Som člen Claude Bootcampu, podnikateľ, nie programátor. Potrebujem aby si ma
+Som člen Claude Bootcampu, podnikateľ, nie programátor. Potrebujem, aby si ma
 previedol celou inštaláciou krok za krokom — od nuly po deploynutý systém,
 ku ktorému sa pripojím cez MCP.
 
 Prečítaj si SETUP_GUIDE.md a postupuj presne podľa neho. Začni Fázou 0 a pýtaj
-sa ma postupne. Riešiš všetko za mňa — spúšťaj príkazy, edituj súbory, riešiš
+sa ma postupne. Rieš všetko za mňa — spúšťaj príkazy, edituj súbory, rieš
 chyby. Pýtaj sa len keď to fakt potrebuješ alebo keď ide o platené/nevratné
 veci. Vysvetľuj v ľudskej reči, nie v žargóne.
 
-Pripravený si? Začni.
+Pripravený? Začni.
 ```
 
 **To je všetko.** Claude od tej chvíle vie:
@@ -101,9 +130,11 @@ RAG_ARCHITECTURE_GUIDE.md  # Hlboký guide o RAG architektúre podľa use case
 
 ## Predpoklady
 
-- **Python 3.10+**
-- **Git**
-- **Claude Code CLI** (`claude`) — predpokladá sa, že ho už máš ako Bootcamp člen
+- **Python 3.10+** (ak nemáš, Claude ti pri setupe povie ako nainštalovať)
+- **Git** (Mac má built-in, Windows: [git-scm.com](https://git-scm.com/download/win))
+- **Claude Code** — buď desktop app alebo CLI. **Stačí jedno z:**
+  - Desktop app: stiahni z [claude.com/code](https://claude.com/code)
+  - CLI: `npm install -g @anthropic-ai/claude-code` (vyžaduje Node.js)
 - **Docker** (voliteľný — len ak chceš lokálny Qdrant namiesto Qdrant Cloud)
 - **Účty:**
   - OpenAI (s ~$5 kreditom)
@@ -123,7 +154,7 @@ Pre hlboké pochopenie architektúry pred kustomizáciou — `knowledge-base/RAG
 
 ## Podpora
 
-- **Bootcamp Discord/Skool** — primárny kanál
+- **Bootcamp Skool** — primárny kanál
 - **Issues** na tomto GitHub repe
 - **Sám sebe** — otvor Claude Code v tomto repo a povedz "mám problém s RAG, pomôž"
 
