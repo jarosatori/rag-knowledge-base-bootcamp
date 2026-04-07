@@ -1,0 +1,20 @@
+.env
+.env.local
+__pycache__/
+*.pyc
+.venv/
+venv/
+audit_log.jsonl
+.ingested_files.json
+
+# Ignore knowledge-base content but keep the architecture guide + folder scaffolding
+knowledge-base/**
+!knowledge-base/RAG_ARCHITECTURE_GUIDE.md
+!knowledge-base/public/
+!knowledge-base/internal/
+!knowledge-base/private/
+!knowledge-base/**/.gitkeep
+
+# Backups and eval results
+tools/backups/
+tests/results/

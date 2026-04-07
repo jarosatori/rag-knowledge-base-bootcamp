@@ -1,0 +1,210 @@
+# name: RAG Evaluation Dataset
+# description: Reprezentatívne testovacie otázky pre meranie kvality retrieval.
+# type: eval-dataset
+# version: 1.0
+# created: 2026-04-07
+# total_questions: 28
+#
+# Ako funguje tento dataset
+#
+# Každá otázka má:
+#   - query: čo sa pýtame
+#   - expected_categories: očakávané kategórie v top-K (aspoň jedna musí match)
+#   - expected_keywords: frázy/slová, ktoré by sa mali objaviť v texte aspoň jedného chunku v top-K
+#                       (case-insensitive, OR logika — stačí jedna match)
+#   - min_score: minimálne skóre najlepšieho výsledku (sanity check)
+#   - notes: prečo je otázka v datasete (čo testuje)
+#
+# Metriky, ktoré harness spočíta:
+#   - Category Hit Rate @ K — % otázok, kde aspoň jeden z top-K má očakávanú kategóriu
+#   - Keyword Hit Rate @ K — % otázok, kde aspoň jeden z top-K obsahuje očakávané kľúčové slovo
+#   - MRR (Mean Reciprocal Rank) — na kategóriách
+#   - Priemerné score najlepšieho výsledku
+
+questions:
+  # ── LEADERSHIP ──────────────────────────────────────────────
+  - id: L01
+    query: "Ako delegovať úlohy efektívne ako founder?"
+    expected_categories: [leadership, business-strategy]
+    expected_keywords: [delegovanie, delegovať, delegácia, zverenie, zodpovednosť]
+    min_score: 0.05
+    notes: "Klasická leadership otázka pre founderov"
+
+  - id: L02
+    query: "Kedy je správny čas odísť z operatívy vo vlastnej firme?"
+    expected_categories: [leadership, mindset]
+    expected_keywords: [operatíva, odchod, CEO, founder, vlastníctvo]
+    min_score: 0.05
+    notes: "Jaro osobne riešil pri Dedoles"
+
+  - id: L03
+    query: "Ako budovať dôveru v tíme?"
+    expected_categories: [leadership, hiring]
+    expected_keywords: [dôvera, tím, vzťah, autenticita]
+    min_score: 0.05
+    notes: "Základná leadership téma"
+
+  - id: L04
+    query: "Ako dávať ťažkú spätnú väzbu ľuďom v tíme?"
+    expected_categories: [leadership, business-strategy]
+    expected_keywords: [feedback, spätná väzba, rozhovor, priamosť]
+    min_score: 0.05
+
+  # ── SALES ───────────────────────────────────────────────────
+  - id: S01
+    query: "Ako predávať drahý produkt bez toho aby to znelo pushy?"
+    expected_categories: [sales]
+    expected_keywords: [predaj, hodnota, cena, zákazník, dôvera]
+    min_score: 0.05
+
+  - id: S02
+    query: "Ako postaviť neodolateľnú ponuku?"
+    expected_categories: [sales, marketing, business-strategy]
+    expected_keywords: [ponuka, offer, hodnota, value, bonus]
+    min_score: 0.05
+    notes: "Core sales framework"
+
+  - id: S03
+    query: "Ako riešiť námietky klientov počas predajného rozhovoru?"
+    expected_categories: [sales]
+    expected_keywords: [námietka, objection, klient, rozhovor, predaj]
+    min_score: 0.05
+
+  # ── MINDSET ─────────────────────────────────────────────────
+  - id: M01
+    query: "Ako zvládať tlak a neistotu ako podnikateľ?"
+    expected_categories: [mindset]
+    expected_keywords: [tlak, neistota, stres, podnikateľ, mindset]
+    min_score: 0.05
+
+  - id: M02
+    query: "Ako sa vyrovnať s neúspechom alebo zlyhaním?"
+    expected_categories: [mindset]
+    expected_keywords: [neúspech, zlyhanie, chyba, učenie]
+    min_score: 0.05
+
+  - id: M03
+    query: "Prečo je dôležité mať jasnú víziu?"
+    expected_categories: [mindset, leadership]
+    expected_keywords: [vízia, smer, cieľ, zmysel]
+    min_score: 0.05
+
+  # ── HIRING ──────────────────────────────────────────────────
+  - id: H01
+    query: "Ako hirovať A-players do malej firmy?"
+    expected_categories: [hiring]
+    expected_keywords: [hiring, nábor, A-player, talent, ľudia]
+    min_score: 0.05
+
+  - id: H02
+    query: "Kedy prepustiť človeka z tímu?"
+    expected_categories: [hiring, leadership]
+    expected_keywords: [prepustenie, odchod, firing, rozhodnutie]
+    min_score: 0.05
+
+  - id: H03
+    query: "Ako viesť pohovor so senior kandidátom?"
+    expected_categories: [hiring]
+    expected_keywords: [pohovor, interview, kandidát, otázky]
+    min_score: 0.05
+
+  # ── CULTURE ─────────────────────────────────────────────────
+  - id: C01
+    query: "Ako budovať firemnú kultúru od nuly?"
+    expected_categories: [hiring, leadership]
+    expected_keywords: [kultúra, hodnoty, firma, tím, DNA]
+    min_score: 0.05
+
+  - id: C02
+    query: "Ako udržať kultúru keď firma rastie rýchlo?"
+    expected_categories: [hiring, leadership, operations]
+    expected_keywords: [kultúra, rast, škálovanie, hodnoty]
+    min_score: 0.05
+
+  # ── FINANCE ─────────────────────────────────────────────────
+  - id: F01
+    query: "Ako riadiť cashflow v rastúcej firme?"
+    expected_categories: [finance, operations]
+    expected_keywords: [cashflow, peniaze, hotovosť, likvidita]
+    min_score: 0.05
+
+  - id: F02
+    query: "Kedy brať investora a kedy bootstrap?"
+    expected_categories: [finance, mindset]
+    expected_keywords: [investor, investícia, bootstrap, vlastníctvo]
+    min_score: 0.05
+
+  # ── OPERATIONS ──────────────────────────────────────────────
+  - id: O01
+    query: "Ako systematizovať procesy vo firme?"
+    expected_categories: [operations, business-strategy]
+    expected_keywords: [proces, systém, SOP, štandard]
+    min_score: 0.05
+
+  - id: O02
+    query: "Ako merať produktivitu tímu?"
+    expected_categories: [operations, leadership]
+    expected_keywords: [produktivita, KPI, metrika, výkon]
+    min_score: 0.05
+
+  # ── MARKETING ───────────────────────────────────────────────
+  - id: MK01
+    query: "Ako stavať osobný brand na LinkedIne?"
+    expected_categories: [marketing]
+    expected_keywords: [LinkedIn, brand, content, osobná značka]
+    min_score: 0.05
+
+  - id: MK02
+    query: "Ako vytvárať obsah ktorý skutočne funguje?"
+    expected_categories: [marketing]
+    expected_keywords: [obsah, content, hook, publikum]
+    min_score: 0.05
+
+  # ── JARO STORIES / DEDOLES ──────────────────────────────────
+  - id: J01
+    query: "Ako Jaro budoval Dedoles?"
+    expected_categories: [leadership, operations, case-study, business-strategy]
+    expected_keywords: [Dedoles, budovanie, firma, príbeh]
+    min_score: 0.05
+    notes: "Osobný príbeh — test či sa príbehy dobre retrievnú"
+
+  - id: J02
+    query: "Prečo Jaro odišiel z Dedoles?"
+    expected_categories: [mindset, leadership]
+    expected_keywords: [Dedoles, odchod, operatíva, rozhodnutie]
+    min_score: 0.05
+
+  - id: J03
+    query: "Aké chyby Jaro urobil pri škálovaní firmy?"
+    expected_categories: [operations, leadership, mindset, case-study]
+    expected_keywords: [chyba, škálovanie, lekcia, rast]
+    min_score: 0.05
+
+  # ── EDGE CASES ──────────────────────────────────────────────
+  - id: E01
+    query: "hiring"
+    expected_categories: [hiring]
+    expected_keywords: [hiring, nábor, tím]
+    min_score: 0.05
+    notes: "Single-word query — test či vráti zmysluplný výsledok"
+
+  - id: E02
+    query: "Ako zistím či mám product-market fit?"
+    expected_categories: [marketing, sales, operations]
+    expected_keywords: [product-market fit, PMF, trh, produkt]
+    min_score: 0.05
+    notes: "Špecifický termín — test sémantiky cez anglicizmus"
+
+  - id: E03
+    query: "Keď nevládzem a som vyhorený čo mám robiť?"
+    expected_categories: [mindset]
+    expected_keywords: [burnout, vyhorenie, energia, oddych, reset]
+    min_score: 0.05
+    notes: "Emocionálna otázka — test či nájde mindset chunky"
+
+  - id: E04
+    query: "Ako nastaviť OKRs v startupe?"
+    expected_categories: [operations, leadership, business-strategy]
+    expected_keywords: [OKR, cieľ, KPI, metrika]
+    min_score: 0.05
+    notes: "Framework-specific query"
